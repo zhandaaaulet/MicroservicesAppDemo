@@ -1,6 +1,11 @@
-﻿namespace Catalog.API.Entities
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace AspnetRunBasics.Models
 {
-    public class BasketCartItem
+    public class BasketItemModel
     {
         public int Quantity { get; set; }
         public string Color { get; set; }

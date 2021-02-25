@@ -34,12 +34,12 @@ namespace Basket.API.Repositories
         {
             var updated = await _context
                               .Redis
-                              .StringSetAsync(basket.Username, JsonConvert.SerializeObject(basket));
+                              .StringSetAsync(basket.UserName, JsonConvert.SerializeObject(basket));
             if (!updated)
             {
                 return null;
             }
-            return await GetBasket(basket.Username);
+            return await GetBasket(basket.UserName);
         }
 
         public async Task<bool> DeleteBasket(string userName)
