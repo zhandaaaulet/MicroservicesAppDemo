@@ -31,8 +31,8 @@ namespace ShoppingWeb
             services.AddRazorPages();
             services.AddHttpClient();
             services.AddTransient<IOrderApi, OrderApi>();
-            //services.AddTransient<IBasketApi, BasketApi>();
-            //services.AddTransient<ICatalogApi, CatalogApi>();
+            services.AddTransient<IBasketApi, BasketApi>();
+            services.AddTransient<ICatalogApi, CatalogApi>();
 
         }
 
