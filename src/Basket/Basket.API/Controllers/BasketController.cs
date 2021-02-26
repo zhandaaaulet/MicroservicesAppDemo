@@ -76,11 +76,13 @@ namespace Basket.API.Controllers
 
             var eventMessage = _mapper.Map<BasketCheckoutEvent>(basketCheckout);
             eventMessage.RequestId = Guid.NewGuid();
+            eventMessage.TotalPrice = basket.TotalPrice;
 
             try
             {
                 _eventBus.PublishBasketCheckout(EventBusConstants.BasketCheckoutQueue, eventMessage);
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 _logger.LogError("Error: Message cannot be published for user: " + basketCheckout.UserName + ", " + e.Message);
                 throw;
