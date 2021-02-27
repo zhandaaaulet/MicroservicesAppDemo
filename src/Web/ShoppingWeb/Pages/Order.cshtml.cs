@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ShoppingWeb.ApiContainer.Interfaces;
 using ShoppingWeb.Models;
 
-namespace AspnetRunBasics
+namespace ShoppingWeb.Pages
 {
     public class OrderModel : PageModel
     {
@@ -13,16 +14,16 @@ namespace AspnetRunBasics
 
         public OrderModel(IOrderApi orderApi)
         {
-            _orderApi = orderApi;
+            _orderApi = orderApi ?? throw new ArgumentNullException(nameof(orderApi));
         }
 
         public IEnumerable<OrderResponse> Orders { get; set; } = new List<OrderResponse>();
 
         public async Task<IActionResult> OnGetAsync()
         {
-            Orders = await _orderApi.GetOrdersByUsername("test");
+            Orders = await _orderApi.GetOrdersByUsername("zhand");
 
             return Page();
-        }       
+        }
     }
 }

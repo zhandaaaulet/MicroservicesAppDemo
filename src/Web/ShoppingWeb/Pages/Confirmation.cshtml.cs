@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace AspnetRunBasics
+namespace ShoppingWeb.Pages
 {
     public class ConfirmationModel : PageModel
     {
