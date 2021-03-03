@@ -13,6 +13,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Rebate.API.Data;
+using Rebate.API.Repositories;
+using Rebate.API.Repositories.Interfaces;
 
 namespace Rebate.API
 {
@@ -30,6 +32,7 @@ namespace Rebate.API
         {
             services.AddDbContext<RebateContext>(options => options.UseNpgsql(Configuration["ConnectionStrings:DefaultConnection"]));
             services.AddControllers();
+            services.AddScoped<IRebateRepository, RebateRepository>();
 
             #region Swagger Dependencies
 

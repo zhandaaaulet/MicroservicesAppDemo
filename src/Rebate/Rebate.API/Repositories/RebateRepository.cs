@@ -1,4 +1,5 @@
-﻿using Rebate.API.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Rebate.API.Data;
 using Rebate.API.Entities;
 using Rebate.API.Repositories.Interfaces;
 using System;
@@ -17,24 +18,35 @@ namespace Rebate.API.Repositories
             _db = db;
         }
 
-        public Task<bool> CreateRebate(Voucher voucher)
+        public async Task<bool> CreateRebate(Voucher voucher)
         {
-            throw new NotImplementedException();
+            _db.Vouchers.Add(voucher);
+            return (await _db.SaveChangesAsync()) > 0;
         }
 
-        public Task<Voucher> GetRebate(string name)
+        public async Task<Voucher> GetRebate(string name)
         {
-            throw new NotImplementedException();
+            var rebate = await _db.Vouchers.Where(x => x.Name == name).FirstOrDefaultAsync();
+            return rebate;
         }
 
-        public Task<bool> RemoveRebate(string name)
+        public async Task<bool> RemoveRebate(string name)
         {
-            throw new NotImplementedException();
+            var rebate = _db.Vouchers.Where(x => x.Name == name).FirstOrDefault();
+            if (rebate != null)
+            {
+                _db.Vouchers.Remove(rebate);
+                return (await _db.SaveChangesAsync()) > 0;
+            }
+            return false;
+
+
         }
 
-        public Task<bool> UpdateRebate(Voucher voucher)
+        public async Task<bool> UpdateRebate(Voucher voucher)
         {
-            throw new NotImplementedException();
+            _db.Entry(voucher).State = EntityState.Modified;
+            return (await _db.SaveChangesAsync()) > 0;
         }
     }
 }
