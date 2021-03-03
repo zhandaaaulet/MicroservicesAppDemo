@@ -23,8 +23,8 @@ namespace ShoppingWeb.ApiContainer
 
         public async Task<BasketResponse> GetBasket(string userName)
         {
-            var message = new HttpRequestBuilder(_settings.BaseAddress)
-                                .SetPath(_settings.BasketPath)
+            var message = new HttpRequestBuilder(_settings.BaseAddress)  //  http://localhost:7000
+                                .SetPath(_settings.BasketPath) // http://localhost:7000/BasketPath
                                 .AddQueryString("username", userName)
                                 .HttpMethod(HttpMethod.Get)
                                 .GetHttpMessage();
